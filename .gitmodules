@@ -1,0 +1,3 @@
+[submodule "torsocks"]
+	path = torsocks
+	url = https://github.com/torsocks/torsocks.git

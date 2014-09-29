@@ -6,7 +6,7 @@ For more info, look at README.md
 from socket import socket, SOL_SOCKET, SO_REUSEADDR
 from socket import error as sock_err
 import selectors
-import tor_socks
+import torsocks
 import sys
 import threading
 import queue
@@ -23,7 +23,7 @@ def register_listeners(args):
     selector = selectors.DefaultSelector()
     for offset, arg in enumerate(args):
         try:
-            tor_socks.onion_check(arg)
+            torsocks.onion_check(arg)
         except ValueError:
             print(RED.format(arg), 'not a valid tor domain, ignoring')
         else:
@@ -79,7 +79,7 @@ def main():
                 client = key.fileobj.accept()[0]
 
                 try:
-                    tor = tor_socks.create_connection((key.data, MC_PORT))
+                    tor = torsocks.create_connection((key.data, MC_PORT))
                 except ValueError as exc:
                     logging.exception(exc)
                     sel.unregister(key.fileobj)
